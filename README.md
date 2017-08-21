@@ -4,9 +4,9 @@ Create angular $resource / vue-resource like objects for interacting with RESTfu
 
 ---
 
-Idea taken from @howareyouo response : https://github.com/mzabriskie/axios/issues/894
+## Install:
 
----
+`yarn add axios-simple-service`
 
 ## Usage:
 
@@ -54,3 +54,9 @@ $users = userResource
   .catch(err => console.error(err))
 
 ```
+
+---
+
+### Credits
+
+Idea taken from @howareyouo response : https://github.com/mzabriskie/axios/issues/894
