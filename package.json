@@ -1,0 +1,22 @@
+{
+  "name": "@oldskool73/axios-simple-service",
+  "version": "0.1.0",
+  "description": "A simple service wrapper for Axios (and similar http services)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel index.js --out-file dist/index.js",
+    "test": "babel-node spec/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oldskool73/axios-simple-service.git"
+  },
+  "keywords": ["axios", "service"],
+  "author": "Adam Robertson <oldskool73@gmail.com>",
+  "license": "WTFPL",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jasmine": "^2.7.0"
+  }
+}
