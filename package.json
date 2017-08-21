@@ -1,5 +1,5 @@
 {
-  "name": "@oldskool73/axios-simple-service",
+  "name": "axios-simple-service",
   "version": "0.1.0",
   "description": "A simple service wrapper for Axios (and similar http services)",
   "main": "dist/index.js",
