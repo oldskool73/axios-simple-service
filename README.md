@@ -13,11 +13,9 @@ Create angular $resource / vue-resource like objects for interacting with RESTfu
 ```
 
 import axios from 'axios'
-import resource from 'axios-simple-resource'
+import service from 'axios-simple-service'
 
-const userResource = () => resource('/api/user', axios, {})
-
-export default userResource
+export const UserResource = service('/api/users', axios, {})
 
 ```
 
@@ -25,44 +23,64 @@ You can then interact with your resource like...
 
 ```
 
-import userResource from './userResource'
+import UserResource from './UserResource'
 
-$users = userResource.query({active: true}) // get `api/user?active=true`
-$user = userResource.get(1) // get `api/user/1`
-userResource.create({email:'foo@bar.com', name: 'foo'}) // post `api/user`
-userResource.update(1, {name: 'bar'}) // put `api/user/1`
-userResource.delete(1) // delete `api/user/1`
-
-```
-
-You can creare additional methods at creation time, e.g...
+let users = UserResource.query({active: true}) // get `api/users?active=true`
+let user = UserResource.get(1) // get `api/users/1`
+UserResource.create({email:'foo@bar.com', name: 'foo'}) // post `api/users`
+UserResource.update(1, {name: 'bar'}) // put `api/users/1`
+UserResource.delete(1) // delete `api/users/1`
 
 ```
 
-const userResource = resource('/user', axios, {
-  active: () => axios.get('/user', {
+### Service Parameters
+
+`service(URI, Axios, [Custom Resources])`
+
+
+* URL (required)
+
+Url to the service, e.g. `/api/users` etc
+
+* Axios (required)
+
+Reference to the Axios instance
+
+* Custom Resources (optional)
+
+You can add additional 'custom' methods at creation time, e.g...
+
+```
+
+const UserResource = resource('/users', axios, {
+  active: () => axios.get('/users', {
     active: true
   })
 })
 
 ...
 
-$activeUsers = userResource.active()
+let activeUsers = UserResource.active()
 
 ```
+
+### Promises
 
 All methods return the axios instance for promise chaining...
 
 ```
 
-$users = userResource
-  .query()
-  .then(res => this.users = res.data)
+let users = UserResource.query()
+  .then(res => res.data.user)
   .catch(err => console.error(err))
 
 ```
 
 ---
+
+### Notes :
+
+* Yes, this should probably be called `axios-simple-resource`, but it was late and I'm an idiot and added it to npm with the wrong name, so .... 
 
 ### Credits
 
