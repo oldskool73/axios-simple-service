@@ -1,6 +1,6 @@
 {
   "name": "axios-simple-service",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple service wrapper for Axios (and similar http services)",
   "main": "dist/index.js",
   "scripts": {
