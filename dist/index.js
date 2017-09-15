@@ -28,19 +28,24 @@ function resource(path, http) {
 
   var obj = {
     query: function query(params) {
-      return http.get(path, { params: params });
+      var conf = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return http.get(path, Object.assign(conf, { params: params }));
     },
     get: function get(id, params) {
-      return http.get(path + '/' + id, { params: params });
+      var conf = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return http.get(path + '/' + id, Object.assign(conf, { params: params }));
     },
     create: function create(obj) {
-      return http.post(path, obj);
+      var conf = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return http.post(path, obj, conf);
     },
     update: function update(id, obj) {
-      return http.put(path + '/' + id, obj);
+      var conf = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return http.put(path + '/' + id, obj, conf);
     },
     delete: function _delete(id) {
-      return http.delete(path + '/' + id);
+      var conf = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return http.delete(path + '/' + id, conf);
     }
   };
   return Object.assign(obj, actions);
