@@ -6,7 +6,16 @@ describe('Resource', () => {
   beforeEach(() => {
     path = '/foo'
     params = { foo: 'bar' }
-    http = {}
+    http = {
+      // eslint-disable-next-line no-unused-vars
+      get: (params, opts) => {},
+      // eslint-disable-next-line no-unused-vars
+      post: (params, opts) => {},
+      // eslint-disable-next-line no-unused-vars
+      put: (params, opts) => {},
+      // eslint-disable-next-line no-unused-vars
+      delete: (params, opts) => {}
+    }
     res = Resource(path, http)
   })
 
@@ -21,8 +30,6 @@ describe('Resource', () => {
       expect(typeof res.query).toBe('function')
     })
     it('should call `http.get` and pass params', () => {
-      // eslint-disable-next-line no-unused-vars
-      http.get = params => {}
       spyOn(http, 'get')
       res.query(params)
       expect(http.get).toHaveBeenCalledWith(path, {
@@ -36,8 +43,6 @@ describe('Resource', () => {
       expect(typeof res.get).toBe('function')
     })
     it('should call `http.get` with an id and params', () => {
-      // eslint-disable-next-line no-unused-vars
-      http.get = params => {}
       spyOn(http, 'get')
       res.get(1, params)
       expect(http.get).toHaveBeenCalledWith(path + '/1', {
@@ -51,8 +56,6 @@ describe('Resource', () => {
       expect(typeof res.create).toBe('function')
     })
     it('should call `http.post` with data', () => {
-      // eslint-disable-next-line no-unused-vars
-      http.post = params => {}
       spyOn(http, 'post')
       res.create(params)
       expect(http.post).toHaveBeenCalledWith(path, params)
@@ -64,8 +67,6 @@ describe('Resource', () => {
       expect(typeof res.update).toBe('function')
     })
     it('should call `http.put` with data', () => {
-      // eslint-disable-next-line no-unused-vars
-      http.put = params => {}
       spyOn(http, 'put')
       res.update(1, params)
       expect(http.put).toHaveBeenCalledWith(path + '/1', params)
@@ -77,8 +78,6 @@ describe('Resource', () => {
       expect(typeof res.delete).toBe('function')
     })
     it('should call `http.put` with data', () => {
-      // eslint-disable-next-line no-unused-vars
-      http.delete = params => {}
       spyOn(http, 'delete')
       res.delete(1)
       expect(http.delete).toHaveBeenCalledWith(path + '/1')
