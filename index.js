@@ -19,8 +19,8 @@
  */
 export default function resource(path, http, actions = {}) {
 	let obj = {
-		query: (params, conf = {}) => http.get(path, Object.assign(conf, { params })),
-		get: (id, params, conf = {}) => http.get(path + '/' + id, Object.assign(conf, { params })),
+		query: (params = {}, conf = {}) => http.get(path, Object.assign(conf, { params })),
+		get: (id, params = {}, conf = {}) => http.get(path + '/' + id, Object.assign(conf, { params })),
 		create: (obj, conf = {}) => http.post(path, obj, conf),
 		update: (id, obj, conf = {}) => http.put(path + '/' + id, obj, conf),
 		delete: (id, conf = {}) => http.delete(path + '/' + id, conf)

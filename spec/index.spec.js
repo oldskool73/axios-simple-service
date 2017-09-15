@@ -1,11 +1,12 @@
 import Resource from '../dist'
 
 describe('Resource', () => {
-  let path, params, http, res
+  let path, params, config, http, res
 
   beforeEach(() => {
     path = '/foo'
     params = { foo: 'bar' }
+    config = { fizz: 'buzz' }
     http = {
       // eslint-disable-next-line no-unused-vars
       get: (params, opts) => {},
@@ -31,10 +32,11 @@ describe('Resource', () => {
     })
     it('should call `http.get` and pass params', () => {
       spyOn(http, 'get')
-      res.query(params)
-      expect(http.get).toHaveBeenCalledWith(path, {
-        params: params
-      })
+      res.query(params, config)
+      expect(http.get).toHaveBeenCalledWith(
+        path, 
+        Object.assign(config, {params})
+      )
     })
   })
 
@@ -44,10 +46,8 @@ describe('Resource', () => {
     })
     it('should call `http.get` with an id and params', () => {
       spyOn(http, 'get')
-      res.get(1, params)
-      expect(http.get).toHaveBeenCalledWith(path + '/1', {
-        params: params
-      })
+      res.get(1, params, config)
+      expect(http.get).toHaveBeenCalledWith(path + '/1', Object.assign(config, {params}))
     })
   })
 
@@ -57,8 +57,8 @@ describe('Resource', () => {
     })
     it('should call `http.post` with data', () => {
       spyOn(http, 'post')
-      res.create(params)
-      expect(http.post).toHaveBeenCalledWith(path, params)
+      res.create(params, config)
+      expect(http.post).toHaveBeenCalledWith(path, params, config)
     })
   })
 
@@ -68,8 +68,8 @@ describe('Resource', () => {
     })
     it('should call `http.put` with data', () => {
       spyOn(http, 'put')
-      res.update(1, params)
-      expect(http.put).toHaveBeenCalledWith(path + '/1', params)
+      res.update(1, params, config)
+      expect(http.put).toHaveBeenCalledWith(path + '/1', params, config)
     })
   })
 
@@ -79,8 +79,8 @@ describe('Resource', () => {
     })
     it('should call `http.put` with data', () => {
       spyOn(http, 'delete')
-      res.delete(1)
-      expect(http.delete).toHaveBeenCalledWith(path + '/1')
+      res.delete(1, config)
+      expect(http.delete).toHaveBeenCalledWith(path + '/1', config)
     })
   })
 })

@@ -27,11 +27,13 @@ function resource(path, http) {
   var actions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   var obj = {
-    query: function query(params) {
+    query: function query() {
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var conf = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return http.get(path, Object.assign(conf, { params: params }));
     },
-    get: function get(id, params) {
+    get: function get(id) {
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var conf = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return http.get(path + '/' + id, Object.assign(conf, { params: params }));
     },
